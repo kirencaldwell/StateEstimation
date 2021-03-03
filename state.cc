@@ -1,22 +1,18 @@
 #include "state.h"
 
-template <class T>
-State<T>::State(std::string state_name, T initial_value) {
+State::State(std::string state_name, VectorXd initial_value) {
     _x = initial_value;
     _state_name = state_name;
 }
 
-template <class T>
-T State<T>::GetValue() {
+VectorXd State::GetValue() {
     return _x;
 }
 
-template <class T>
-T State<T>::SetValue(T value) {
+void State::SetValue(VectorXd value) {
     _x = value;
 }
 
-template <class T>
-std::string State<T>::GetName() {
+std::string State::GetName() {
     return _state_name;
 }

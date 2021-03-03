@@ -4,15 +4,16 @@
 #include "Eigen/Dense"
 #include <iostream>
 
-template <class T>
+using Eigen::VectorXd;
+
 class State {
     public:
-        State(std::string state_name, T initial_value);
-        T GetValue();
-        T SetValue(T value);
+        State(std::string state_name, VectorXd initial_value);
+        VectorXd GetValue();
+        void SetValue(VectorXd value);
         std::string GetName();
     protected:
-        T _x;
+        VectorXd _x;
         std::string _state_name;
 };
 
