@@ -94,13 +94,15 @@ void KalmanFilter::EkfUpdate(std::vector<SystemModel*> sensors) {
     UpdateState();
     // std::cout << "x = " << _x << "\n\n";
 
-    MatrixXd F = GetSystemJacobian(_models, _x.size(), 0.0001);
-    // std::cout << "F = " << F << "\n\n";
+    if (_models.size() > 0) {
+        MatrixXd F = GetSystemJacobian(_models, _x.size(), 0.0001);
+        // std::cout << "F = " << F << "\n\n";
 
-    MatrixXd Q = GetSystemVariance(_models, _x.size());
-    // std::cout << "Q = " << Q << "\n\n";
-    _P = F*_P*F.transpose() + Q;
+        MatrixXd Q = GetSystemVariance(_models, _x.size());
+        // std::cout << "Q = " << Q << "\n\n";
+        _P = F*_P*F.transpose() + Q;
     // std::cout << "P = " << _P << "\n\n";
+    }
     
     if (sensors.size() > 0) {
         VectorXd y = GetMeasurementVector(sensors);
