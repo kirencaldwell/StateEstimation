@@ -8,7 +8,7 @@ main: state.o telemetry_logging.o bias_model.o attitude_deviation_model.o magnet
 # main: measurement_system.o magnetometer.o linear_algebra.o system_model.o accelerometer.o test_measurement_system.o
 	# $(CC) -o test_measurement_system magnetometer.o measurement_system.o linear_algebra.o system_model.o accelerometer.o test_measurement_system.o
 
-%.o : %.cc
+%.o : %.cc %.h
 	$(CC) -c $(CCFLAGS) $<
 
 # kalman_filter_test.o: kalman_filter_test.cc 

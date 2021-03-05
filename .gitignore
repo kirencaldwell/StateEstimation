@@ -10,3 +10,6 @@
 
 #ignore output logfile
 logfile.csv
+
+#ignore executable
+kf_test
