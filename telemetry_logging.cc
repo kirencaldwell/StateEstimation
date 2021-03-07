@@ -1,7 +1,21 @@
 #include "telemetry_logging.h"
 
-void TelemetryLogging::AddSignal(Signal signal) {
-    _signals.push_back(signal);
+void TelemetryLogging::AddSignal(std::string signal_name, VectorXd *signal) {
+    Signal tlm = Signal(signal_name);
+    tlm.SetSignal(signal);
+    _signals.push_back(tlm);
+}
+
+void TelemetryLogging::AddSignal(std::string signal_name, MatrixXd *signal) {
+    Signal tlm = Signal(signal_name);
+    tlm.SetSignal(signal);
+    _signals.push_back(tlm);
+}
+
+void TelemetryLogging::AddSignal(std::string signal_name, double *signal) {
+    Signal tlm = Signal(signal_name);
+    tlm.SetSignal(signal);
+    _signals.push_back(tlm);
 }
 
 void TelemetryLogging::LogSignals() {

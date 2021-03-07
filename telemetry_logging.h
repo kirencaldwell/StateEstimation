@@ -32,7 +32,9 @@ class Signal {
 class TelemetryLogging {
     public:
         TelemetryLogging(std::string filename);
-        void AddSignal(Signal signal);
+        void AddSignal(std::string signal_name, VectorXd *signal);
+        void AddSignal(std::string signal_name, MatrixXd *signal);
+        void AddSignal(std::string signal_name, double *signal);
         void LogSignals();
         void CreateLogHeader();
         void EndLogging();
