@@ -89,3 +89,8 @@ void PrintTimeUpdate(double t, MatrixXd R, int K) {
     }
     k++;
 }
+
+VectorXd GetMvnRnd(MatrixXd R) {
+    normal_random_variable v {R};
+    return v();
+}
