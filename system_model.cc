@@ -43,8 +43,7 @@ VectorXd SystemModel::RunModel(VectorXd x) {
 }
 
 VectorXd SystemModel::GetNoisyOutput(VectorXd x) {
-    normal_random_variable v { _R };
-    VectorXd y = RunModel(x) + v();
+    VectorXd y = RunModel(x) + GetMvnRnd(_R);
     return y;
 }
 
