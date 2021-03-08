@@ -57,7 +57,7 @@ VectorXd GetSubspace(VectorXd a, int s, int f) {
 std::string CreateLoggingString(double x) {
     std::string out;
     std::string xx;
-    xx = std::to_string(x) + ", ";
+    xx = std::to_string(x) + ",";
     out.append(xx);
     return out;
 }
@@ -65,7 +65,7 @@ std::string CreateLoggingString(VectorXd x) {
     std::string out;
     std::string xx;
     for (int i = 0; i < x.size(); i++) {
-        xx = std::to_string(x(i)) + ", ";
+        xx = std::to_string(x(i)) + ",";
         out.append(xx);
     }
     return out;
@@ -75,7 +75,7 @@ std::string CreateLoggingString(MatrixXd x) {
     std::string xx;
     for (int i = 0; i < x.cols(); i++) {
         for (int j = 0; j < x.rows(); j++) {
-            xx = std::to_string(x(j,i)) + ", ";
+            xx = std::to_string(x(j,i)) + ",";
             out.append(xx);
         }
     }

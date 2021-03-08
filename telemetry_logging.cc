@@ -59,7 +59,7 @@ std::string Signal::GetSignalHeader() {
                 out.append(_signal_name);
                 out.append(std::to_string(j));
                 out.append(std::to_string(i));
-                out.append(", ");
+                out.append(",");
             }
         }
     } 
@@ -67,12 +67,12 @@ std::string Signal::GetSignalHeader() {
         for (int i = 0; i < (*_vx).size(); i++) {
             out.append(_signal_name);
             out.append(std::to_string(i));
-            out.append(", ");
+            out.append(",");
         }
     }
     else if (_datatype == "scalar") {
         out.append(_signal_name);
-        out.append(", ");
+        out.append(",");
     }
     else {
         return "sorry";
