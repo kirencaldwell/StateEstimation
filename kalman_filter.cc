@@ -90,11 +90,10 @@ VectorXd KalmanFilter::GetResidual() {
 }
 
 void KalmanFilter::EkfUpdate(std::vector<SystemModel*> sensors) {
-    
-    UpdateState();
-    // std::cout << "x = " << _x << "\n\n";
 
     if (_models.size() > 0) {
+        UpdateState();
+        // std::cout << "x = " << _x << "\n\n";
         MatrixXd F = GetSystemJacobian(_models, _x.size(), 0.0001);
         // std::cout << "F = " << F << "\n\n";
 
