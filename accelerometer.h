@@ -11,11 +11,12 @@ using namespace Eigen;
 
 class Accelerometer: public SystemModel{
     public:
-        void InitAccelerometer(MatrixXd *R_bn, VectorXd *w_bn, VectorXd *b_a, double *dt);
+        void InitAccelerometer(MatrixXd *R_bn, VectorXd *a_nn, VectorXd *w_bn, VectorXd *b_a, double *dt);
         VectorXd RunModel(VectorXd x) override;
         // VectorXd RunModel(std::vector<State<VectorXd>> x) override;
     private:
         MatrixXd *_R_bn;
+        VectorXd *_a_nn;
         VectorXd *_w_bn;
         VectorXd *_b_a;
         double *_dt;

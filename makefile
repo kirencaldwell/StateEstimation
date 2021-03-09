@@ -2,8 +2,8 @@ CC = g++
 CCFLAGS = -Wall 
 
 # TODO: kirencaldwell - learn how to makefile and clean this up
-main: state.o telemetry_logging.o bias_model.o attitude_deviation_model.o magnetometer.o attitude_sensor_model.o kalman_filter_test.o kalman_filter.o system_model.o accelerometer.o utilities.o gyroscope.o
-	$(CC) -o kf_test state.o telemetry_logging.o bias_model.o attitude_deviation_model.o magnetometer.o attitude_sensor_model.o kalman_filter_test.o kalman_filter.o system_model.o accelerometer.o utilities.o gyroscope.o -I.
+main: uncalibrated_accelerometer.o telemetry_logging.o bias_model.o attitude_deviation_model.o magnetometer.o attitude_sensor_model.o kalman_filter_test.o kalman_filter.o system_model.o accelerometer.o utilities.o gyroscope.o
+	$(CC) -o kf_test uncalibrated_accelerometer.o telemetry_logging.o bias_model.o attitude_deviation_model.o magnetometer.o attitude_sensor_model.o kalman_filter_test.o kalman_filter.o system_model.o accelerometer.o utilities.o gyroscope.o -I.
 
 # main: measurement_system.o magnetometer.o linear_algebra.o system_model.o accelerometer.o test_measurement_system.o
 	# $(CC) -o test_measurement_system magnetometer.o measurement_system.o linear_algebra.o system_model.o accelerometer.o test_measurement_system.o
