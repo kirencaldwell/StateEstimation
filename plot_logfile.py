@@ -10,6 +10,7 @@ plot_accel_bias = False
 plot_w = False
 plot_measurements = False 
 plot_accel_3d = False 
+plot_position = False 
 if len(sys.argv) == 1:
     plot_attitude = True
     plot_gyro_bias = True
@@ -17,6 +18,7 @@ if len(sys.argv) == 1:
     plot_w = True
     plot_measurements = True
     plot_accel_3d = True
+    plot_position = True
 else:
     for i in range(1, len(sys.argv)):
         arg = sys.argv[i]
@@ -32,6 +34,8 @@ else:
             plot_measurements = True
         if arg == "accel_3d":
             plot_accel_3d = True
+        if arg == "position":
+            plot_position = True
     
 
 mpl.rcParams['figure.figsize'] = (16.0, 8.0)
@@ -130,4 +134,21 @@ if plot_accel_3d:
     ax = fig.add_subplot(111, projection='3d')
     ax.scatter(df.accel0, df.accel1, df.accel2, marker='o')
     ax.grid(True)
+    plt.show()
+
+# plot position
+if plot_position:
+    y_names = ["x_nn", "v_nn", "a_nn"]
+    fig, ax = plt.subplots(3)
+    for i in range(0, 3):
+        for j in range(0, 3):
+            col_name = y_names[i] + str(j)
+            y_df = df.filter(regex=col_name)
+            ax[i].plot(df.t, y_df, linewidth = 4)
+            col_name = y_names[i] + "_hat" + str(j)
+            y_df = df.filter(regex=col_name)
+            ax[i].plot(df.t, y_df, linewidth = 4)
+            ax[i].grid(True)
+            ax[i].set_ylabel(y_names[i])
+    ax[i].legend(["true", "estimated"])
     plt.show()

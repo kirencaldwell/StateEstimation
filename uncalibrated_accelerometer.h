@@ -12,10 +12,11 @@ using namespace Eigen;
 
 class UncalibratedAccelerometer: public SystemModel{
     public:
-        void InitUncalibratedAccelerometer(MatrixXd *R_bn, VectorXd *b_a, MatrixXd *C_a);
+        void InitUncalibratedAccelerometer(MatrixXd *R_bn, VectorXd *a_nn, VectorXd *b_a, MatrixXd *C_a);
         VectorXd RunModel(VectorXd x) override;
     private:
         MatrixXd *_R_bn;
+        VectorXd *_a_nn;
         VectorXd *_b_a;
         MatrixXd *_C_a;
 };
