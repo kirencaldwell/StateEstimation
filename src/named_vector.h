@@ -6,21 +6,23 @@
 #include <iostream>
 
 using Eigen::VectorXd;
-using namespace std;
 
-class NamedVector {
-  public: 
-    NamedVector(VectorXd initial_value, std::string name);
-    NamedVector();
-    VectorXd GetValue();
-    std::string GetName();
-    void SetName(std::string name);
-    void SetValue(VectorXd value);
-    NamedVector Cat(NamedVector a);
+struct NamedVector {
+  VectorXd value;
+  std::string name;
+};
 
+class NamedVectorArray {
+  public:
+    NamedVectorArray(NamedVector x0);
+    NamedVectorArray(std::vector<NamedVector> x0); 
+    NamedVectorArray();
+
+    VectorXd AsVector();
+    VectorXd GetVectorByName(std::string name);
+      
   protected:
-    VectorXd _value;
-    std::string _name;
+    std::vector<NamedVector> _value;
 }; 
 
 #endif

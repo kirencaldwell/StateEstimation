@@ -7,11 +7,43 @@ Measurement Sensor::GetMeasurement(std::vector<State> x) {
   return _measurement;
 }
 
-MatrixXd Sensor::GetMeasurementMatrix(std::vector<State> x) {
+MatrixXd Sensor::GetMeasurementMatrix(std::vector<State> x, double h) {
+  ComputeMeasurementMatrix(x, h);
   return _measurement_matrix;
 }
 
-void Sensor::ComputeMeasurementMatrix() {
+void Sensor::ComputeMeasurementMatrix(std::vector<State> x, double h) {
+  // Get measurement for given states
+  VectorXd y0 = GetMeasurement(x).GetValue();
+  VectorXd yi = y0;
+  // Compute size of measurement matrix
+  int n = 0;
+  for (int i = 0; i < (int)x.size(); i++) {
+    n = n + x[i].GetValue().size();
+  }
+  MatrixXd H(y0.size(), n);
+
+  // Fill in measurement matrix
+  std::vector<State> x0 = x;
+  int ctr = 0;
+  for (int i = 0; i < (int)x.size(); i++) {
+    VectorXd xi = x[i].GetValue();
+    for (int j = 0; j < xi.size(); j++) {
+      xi = GetIncrementedVector(xi, j, h);
+      x[i].SetValue(xi);
+      yi = GetMeasurement(x).GetValue(); 
+      H.col(ctr) = (yi-y0)/h;
+      xi = GetIncrementedVector(xi, j, -h);
+      x[i].SetValue(xi);
+      ctr++;
+    }
+  }
+  _measurement_matrix = H;
+}
+
+VectorXd Sensor::GetIncrementedVector(VectorXd x, int i, double h) {
+  x[i] = x[i] + h;
+  return x;
 }
 
 void Sensor::UpdateState(std::vector<State> x) {

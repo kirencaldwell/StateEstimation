@@ -1,33 +1,31 @@
 #include "named_vector.h"
 
-NamedVector::NamedVector(VectorXd initial_value, std::string name) {
-  _value = initial_value;
-  _name = name;
+NamedVectorArray::NamedVectorArray(NamedVector x0) {
+  _value.push_back(x0);
 }
 
-NamedVector::NamedVector() {}
-
-VectorXd NamedVector::GetValue() {
-  return _value;
+NamedVectorArray::NamedVectorArray(std::vector<NamedVector> x0) {
+  _value = x0;
 }
 
-std::string NamedVector::GetName() {
-  return _name;
-}
+NamedVectorArray::NamedVectorArray() {}
 
-void NamedVector::SetName(std::string name) {
-  _name = name;
-}
-
-void NamedVector::SetValue(VectorXd value) {
-  _value = value;
-}
-
-NamedVector NamedVector::Cat(NamedVector a) {
-  NamedVector out;
-  VectorXd vec_joined(_value.size() + a.GetValue().size());
-  vec_joined << _value, a.GetValue();
-  out.SetValue(vec_joined);
-  out.SetName(_name + " & " + a.GetName());
+VectorXd NamedVectorArray::AsVector() {
+  VectorXd out;
+  for (int i = 0; i < (int)_value.size(); i++) {
+    VectorXd temp(out.size() + _value[i].value.size());
+    temp << out, _value[i].value;
+    out = temp;
+  }
   return out;
 }
+
+VectorXd NamedVectorArray::GetVectorByName(std::string name) {
+  for (int i = 0; i < (int)_value.size(); i++) {
+    if (name == _value[i].name) {
+      return _value[i].value;
+    }
+  }
+  return VectorXd(0);
+}
+
