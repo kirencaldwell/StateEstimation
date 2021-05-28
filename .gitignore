@@ -1,5 +1,7 @@
 #ignore all .o files
 *.o
+#ignore .swp files
+*.swp
 
 #ignore bazel output
 /bazel-StateEstimation
